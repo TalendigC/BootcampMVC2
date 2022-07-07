@@ -1,0 +1,33 @@
+﻿@model Person
+
+<h1>
+    Agregar persona
+</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" asp-for="LastName">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <select asp-for="GenreId" asp-items="ViewBag.Genres" class="form-control">
+                </select>
+            </div>
+            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+            <button type="submit" class="btn btn-primary">Guardar persona</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial src="_ValidationScriptsPartial"></partial>
+}

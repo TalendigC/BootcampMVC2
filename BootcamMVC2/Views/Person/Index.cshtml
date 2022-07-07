@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Person>
+<h1>
+    Consulta de persona
+</h1>
+<p class="text-right">
+    <a class="btn btn-primary" asp-action="Create">Registrar nueva</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.LastName</td>
+                <td>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a class="btn btn-danger" href="#" onclick="openDeleteModal(@item.Id)">Eliminar</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar registro</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar este registro?</p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <form asp-action="Delete">
+                    <input type="hidden" name="id" id="deletePersonId" />
+                    <button type="submit" class="btn btn-primary">Sí. Eliminar.</button>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts{
+
+    <script>
+        function openDeleteModal(id) {
+            $("#deletePersonId").val(id);
+            $("#deleteModal").modal("show");
+        }
+    </script>
+} 
